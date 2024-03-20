@@ -1,0 +1,44 @@
+def crear_espiral(tamaño):
+    cuadricula = [[0] * tamaño for _ in range(tamaño)]
+    paso = 0
+    valor = 1
+    inicio_fila = 0
+    fin_fila = tamaño - 1
+    inicio_columna = 0
+    fin_columna = tamaño - 1
+
+    while inicio_fila <= fin_fila and inicio_columna <= fin_columna:
+        if paso == 0:
+            for i in range(inicio_columna, fin_columna + 1):
+                cuadricula[inicio_fila][i] = valor
+                valor += 1
+            inicio_fila += 1
+        elif paso == 1:
+            for i in range(inicio_fila, fin_fila + 1):
+                cuadricula[i][fin_columna] = valor
+                valor += 1
+            fin_columna -= 1
+        elif paso == 2:
+            for i in range(fin_columna, inicio_columna - 1, -1):
+                cuadricula[fin_fila][i] = valor
+                valor += 1
+            fin_fila -= 1
+        elif paso == 3:
+            for i in range(fin_fila, inicio_fila - 1, -1):
+                cuadricula[i][inicio_columna] = valor
+                valor += 1
+            inicio_columna += 1
+
+        paso = (paso + 1) % 4
+
+    return cuadricula
+
+def mostrar_cuadricula(cuadricula):
+    for fila in cuadricula:
+        for elemento in fila:
+            print(elemento, end=" ")
+        print()
+
+tamaño = int(input("Ingrese el indice de la matriz cuadrada: "))
+cuadricula_espiral = crear_espiral(tamaño)
+mostrar_cuadricula(cuadricula_espiral)
